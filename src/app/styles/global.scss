@@ -1,0 +1,34 @@
+@use '@/share/constants/styles/variables' as vars;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  color: vars.$main-text-color;
+  font-size: 17px;
+  line-height: 129%;
+  font-weight: 400;
+
+  background-color: vars.$main-background-color;
+
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
+
+label {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}

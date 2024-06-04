@@ -1,0 +1,36 @@
+@use '@/share/constants/styles/variables' as vars;
+@use '@/share/constants/styles/mixins';
+
+:global {
+  .container {
+    max-width: vars.$container-desktop-width;
+    padding: 0 vars.$desktop-padding;
+    margin: 0 auto;
+
+    @include mixins.tablet {
+      max-width: vars.$container-table-width;
+      padding: 0 vars.$table-padding;
+    }
+
+    @include mixins.mobile {
+      max-width: vars.$container-mobile-width;
+      padding: 0 vars.$mobile-padding;
+    }
+  }
+
+  .visually-hidden:not(:focus):not(:active) {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+
+    white-space: nowrap;
+
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+}

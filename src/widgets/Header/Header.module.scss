@@ -1,0 +1,20 @@
+@use '@/share/constants/styles/mixins';
+
+.header {
+  position: relative;
+
+  padding: 28px 0 48px;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 9px;
+
+    background: linear-gradient(to right, #0699db, #2d5e87, #2e2a3f, #341926, #150c15);
+
+    height: 2px;
+
+    content: "";
+  }
+}
