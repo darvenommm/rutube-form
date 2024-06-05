@@ -17,4 +17,12 @@
 
     content: "";
   }
+
+  @include mixins.tablet {
+    max-width: none;
+    width: 100%;
+
+    padding: 20px;
+    padding-bottom: 40px;
+  }
 }

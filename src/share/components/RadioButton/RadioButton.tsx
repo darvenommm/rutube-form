@@ -1,4 +1,7 @@
 import { useId } from 'react';
+import { clsx } from 'clsx';
+
+import classes from './RadioButton.module.scss';
 
 export interface IRadioButtonData {
   name: string;
@@ -23,9 +26,9 @@ export const RadioButton = ({
   const inputId = useId();
 
   return (
-    <div>
-      <label htmlFor={inputId}>{label}</label>
+    <div className="radioButton">
       <input
+        className={clsx('visually-hidden', 'radioButton__input')}
         id={inputId}
         type="radio"
         name={name}
@@ -33,6 +36,12 @@ export const RadioButton = ({
         checked={isChecked}
         onChange={({ target: { name, value } }) => onChange({ name, value })}
       />
+      <label
+        className={clsx(classes.label, 'radioButton__label', { [classes.labelChecked]: isChecked })}
+        htmlFor={inputId}
+      >
+        {label}
+      </label>
     </div>
   );
 };

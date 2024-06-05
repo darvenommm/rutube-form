@@ -8,8 +8,8 @@
     margin: 0 auto;
 
     @include mixins.tablet {
-      max-width: vars.$container-table-width;
-      padding: 0 vars.$table-padding;
+      max-width: vars.$container-tablet-width;
+      padding: 0 vars.$tablet-padding;
     }
 
     @include mixins.mobile {
@@ -18,7 +18,7 @@
     }
   }
 
-  .visually-hidden:not(:focus):not(:active) {
+  .visually-hidden {
     position: absolute;
 
     width: 1px;

@@ -1,0 +1,41 @@
+@use '@/share/constants/styles/variables' as vars;
+@use '@/share/constants/styles/mixins';
+
+
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 14px;
+  line-height: 143%;
+
+  border-radius: 21px;
+  transition: background-color 200ms, opacity 200ms;
+
+  border: 1px solid vars.$extra-color;
+  padding: 10px 15px;
+
+  @include mixins.hover {
+    background-color: vars.$extra-color;
+    opacity: 1;
+  }
+
+  @include mixins.active {
+    background-color: vars.$extra-color;
+    opacity: 0.5;
+  }
+}
+
+.labelChecked {
+  background-color: vars.$extra-color;
+  opacity: 1;
+}
+
+:global {
+  .radioButton__input:focus-visible ~ .radioButton__label {
+    background-color: vars.$extra-color;
+    opacity: 1;
+    outline: 2px solid red;
+  }
+}
