@@ -1,25 +1,29 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { useLocalStorage } from '@/share/hooks/useLocalStorage';
 import { localStorageKeys } from '@/share/constants/localStorage';
-import { paths } from '@/share/constants/paths';
+
+interface IBeautyOutput {
+  questionID: number;
+  responseID: number;
+}
 
 export const ThanksPage = (): JSX.Element => {
-  const navigate = useNavigate();
-
   const [feedback, _] = useLocalStorage<null | number>(localStorageKeys.feedback, null);
-  const [verbose, __] = useLocalStorage<Array<null | number>>(localStorageKeys.verbose, [null]);
+  const [verbose, __] = useLocalStorage<Array<number>>(localStorageKeys.verbose, []);
 
   useEffect((): void => {
-    let needRedirectToMain =
-      feedback === null ||
-      Boolean(verbose.findIndex((verboseItem): boolean => verboseItem === null) + 1);
+    console.log('The feedback', feedback);
 
-    if (needRedirectToMain) {
-      navigate(paths.main);
-    }
-  }, [feedback, verbose, navigate]);
+    const beautyVerbose: IBeautyOutput[] = verbose.map(
+      (item, index): IBeautyOutput => ({
+        questionID: index + 1,
+        responseID: item + 1,
+      }),
+    );
+
+    console.log('The verbose form answers', beautyVerbose);
+  }, []);
 
   return (
     <div className="container">

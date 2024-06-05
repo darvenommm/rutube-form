@@ -10,6 +10,26 @@ import { NotFoundPage } from '@/pages/NotFoundPage/NotFoundPage';
 
 import { localStorageKeys } from '@/share/constants/localStorage';
 
+type Response = ReturnType<typeof redirect>;
+
+const finalPagesLoader = (): null | Response => {
+  const feedback: number = Number(
+    JSON.parse(localStorage.getItem(localStorageKeys.feedback) ?? 'null') ?? '-1',
+  );
+
+  if (feedback === -1) {
+    return redirect(paths.main);
+  }
+
+  const verbose: null | Array<null | number> = JSON.parse(
+    localStorage.getItem(localStorageKeys.verbose) ?? 'null',
+  );
+  const indexOfNull = verbose?.findIndex((item: null | number): boolean => item === null);
+  const needRedirect = verbose === null || indexOfNull !== -1;
+
+  return needRedirect ? redirect(paths.questions) : null;
+};
+
 export const router = createBrowserRouter([
   {
     element: <TemplatePage />,
@@ -17,28 +37,35 @@ export const router = createBrowserRouter([
       {
         path: paths.main,
         element: <MainPage />,
-        loader: () => {
-          const feedback = localStorage.getItem(localStorageKeys.feedback);
-          return feedback !== null ? redirect(paths.questions) : null;
+        loader: (): null | Response => {
+          const feedback: number = Number(
+            JSON.parse(localStorage.getItem(localStorageKeys.feedback) ?? 'null') ?? '-1',
+          );
+
+          return feedback !== -1 ? redirect(paths.questions) : null;
         },
       },
       {
         path: paths.questions,
         element: <QuestionsPage />,
-        loader: () => {
-          const verbose = JSON.parse(localStorage.getItem(localStorageKeys.verbose) || '[null]');
-          const indexOfNull = verbose.findIndex((item: null | number): boolean => item === null);
-          const needRedirect = indexOfNull === -1;
+        loader: (): null | Response => {
+          const verbose: null | Array<null | number> = JSON.parse(
+            localStorage.getItem(localStorageKeys.verbose) || 'null',
+          );
+          const indexOfNull = verbose?.findIndex((item: null | number): boolean => item === null);
+          const needRedirect = verbose !== null && indexOfNull === -1;
           return needRedirect ? redirect(paths.done) : null;
         },
       },
       {
         path: paths.thanks,
         element: <ThanksPage />,
+        loader: finalPagesLoader,
       },
       {
         path: paths.done,
         element: <DonePage />,
+        loader: finalPagesLoader,
       },
     ],
     errorElement: <NotFoundPage />,
