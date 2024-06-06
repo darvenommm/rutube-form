@@ -8,22 +8,33 @@ export interface IRadioButtonData {
   value: string | number;
 }
 
+export enum RadioButtonStyles {
+  index = 'index',
+  text = 'text',
+}
+
 interface IRadioButtonProps {
   label: string | number;
   name: string;
   value: string | number;
+  style?: RadioButtonStyles;
   isChecked?: boolean;
   onChange?: (data: IRadioButtonData) => void;
+  className?: string;
 }
 
 export const RadioButton = ({
   label,
   name,
   value,
+  style = RadioButtonStyles.index,
   isChecked = false,
-  onChange = () => null,
+  onChange,
+  className,
 }: IRadioButtonProps): JSX.Element => {
   const inputId = useId();
+
+  onChange = onChange ?? (() => null);
 
   return (
     <div className="radioButton">
@@ -37,7 +48,15 @@ export const RadioButton = ({
         onChange={({ target: { name, value } }) => onChange({ name, value })}
       />
       <label
-        className={clsx(classes.label, 'radioButton__label', { [classes.labelChecked]: isChecked })}
+        className={clsx(
+          classes.label,
+          'radioButton__label',
+          {
+            [classes.labelText]: style === RadioButtonStyles.text,
+            [classes.labelChecked]: isChecked,
+          },
+          className,
+        )}
         htmlFor={inputId}
       >
         {label}

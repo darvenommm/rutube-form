@@ -1,0 +1,80 @@
+@use '@/share/constants/styles/mixins';
+
+.container {
+  position: relative;
+
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  @include mixins.tablet {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+.title {
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 129%;
+
+  margin: 0;
+  margin-bottom: 28px;
+}
+
+.image {
+  position: absolute;
+  top: 133px;
+  right: 0;
+
+  width: 581px;
+  height: 540px;
+
+  @include mixins.tablet {
+    top: 149px;
+
+    width: 548px;
+    height: 509px;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  margin-bottom: 28px;
+}
+
+.questionText {
+  font-size: 12px;
+  line-height: 167%;
+
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.answersWithText {
+  flex-direction: column;
+
+  width: 200px;
+}
+
+.answerWithText {
+  align-items: start;
+}
+
+.button {
+  @include mixins.mobile {
+    width: 100%;
+  }
+}

@@ -40,13 +40,7 @@ export const MainPage = (): JSX.Element => {
   return (
     <div className="container">
       <div className={classes.container}>
-        <img
-          className={classes.image}
-          width={455}
-          height={200}
-          src={ImageUrl}
-          alt="Люди показывающие оценки предоставленным услугам."
-        />
+        <img aria-hidden className={classes.image} width={455} height={200} src={ImageUrl} alt="" />
         <div className={classes.textContainer}>
           <h2 className={classes.title}>Уважаемый клиент!</h2>
           <p className={classes.text}>

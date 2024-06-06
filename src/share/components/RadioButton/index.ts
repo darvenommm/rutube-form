@@ -1,3 +1,3 @@
-export { RadioButton } from './RadioButton';
+export { RadioButton, RadioButtonStyles } from './RadioButton';
 
 export type { IRadioButtonData } from './RadioButton';

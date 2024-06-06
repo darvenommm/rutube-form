@@ -11,7 +11,7 @@ body {
   font-size: 17px;
   line-height: 129%;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 
   background-color: vars.$main-background-color;
 
@@ -19,6 +19,8 @@ body {
 }
 
 button {
+  color: inherit;
+
   cursor: pointer;
 
   &[disabled] {
@@ -32,4 +34,8 @@ label {
 
 a {
   color: inherit;
+}
+
+img {
+  user-select: none;
 }

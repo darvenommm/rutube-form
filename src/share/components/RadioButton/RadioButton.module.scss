@@ -1,7 +1,6 @@
 @use '@/share/constants/styles/variables' as vars;
 @use '@/share/constants/styles/mixins';
 
-
 .label {
   display: flex;
   justify-content: center;
@@ -10,11 +9,12 @@
   font-size: 14px;
   line-height: 143%;
 
-  border-radius: 21px;
+  border-radius: 50%;
   transition: background-color 200ms, opacity 200ms;
 
   border: 1px solid vars.$extra-color;
-  padding: 10px 15px;
+  width: 40px;
+  height: 40px;
 
   @include mixins.hover {
     background-color: vars.$extra-color;
@@ -25,6 +25,16 @@
     background-color: vars.$extra-color;
     opacity: 0.5;
   }
+}
+
+.labelText {
+  justify-content: start;
+
+  border-radius: 20px;
+
+  padding: 10px 15px;
+  width: auto;
+  height: auto;
 }
 
 .labelChecked {

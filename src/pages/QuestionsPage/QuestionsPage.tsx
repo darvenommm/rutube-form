@@ -1,12 +1,17 @@
 import { useState, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { clsx } from 'clsx';
 
 import { Row } from '@/share/components/Row';
-import { RadioButton } from '@/share/components/RadioButton';
+import { RadioButton, RadioButtonStyles } from '@/share/components/RadioButton';
+import { Button } from '@/share/components/Button';
 import { paths } from '@/share/constants/paths';
 import { fieldsNames, formFields } from './formFields';
 import { useLocalStorage } from '@/share/hooks/useLocalStorage';
 import { localStorageKeys } from '@/share/constants/localStorage';
+
+import classes from './QuestionsPage.module.scss';
+import imageUrl from '@/assets/images/form-image.png';
 
 import type { FormEvent } from 'react';
 import type { IRadioButtonData } from '@/share/components/RadioButton';
@@ -47,46 +52,53 @@ export const QuestionsPage = (): JSX.Element => {
     });
   };
 
-  const submitFormHandler = (event: FormEvent): void => {
+  const submitFormHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     setTimeout((): void => navigate(paths.thanks), 250);
   };
 
   const fields = formFields.map((field, fieldIndex) => {
+    const hasText = (field.texts?.length ?? 0) > 0;
+
     return (
-      <div key={fieldIndex}>
-        <p>
-          {fieldIndex + 1}. {field.title}
+      <div className={classes.question} key={fieldIndex}>
+        <p className={classes.questionText}>
+          {fieldIndex + 1}. {field.title}*
         </p>
-        <Row
-          start={field.start}
-          end={field.end}
-          texts={field.texts}
-          createElement={({ realIndex, index, text }: IRowCreateElementData) => {
-            return (
-              <RadioButton
-                key={realIndex}
-                label={text ?? index}
-                name={field.name}
-                value={realIndex}
-                onChange={changeRadioButtonHandler}
-                isChecked={answers[fieldIndex] !== null && answers[fieldIndex] === realIndex}
-              />
-            );
-          }}
-        />
+        <div className={clsx(classes.answers, { [classes.answersWithText]: hasText })}>
+          <Row
+            start={field.start}
+            end={field.end}
+            texts={field.texts}
+            createElement={({ realIndex, index, text }: IRowCreateElementData) => {
+              return (
+                <RadioButton
+                  className={clsx({ [classes.answerWithText]: hasText })}
+                  key={realIndex}
+                  label={text ?? index}
+                  name={field.name}
+                  value={realIndex}
+                  style={text ? RadioButtonStyles.text : RadioButtonStyles.index}
+                  onChange={changeRadioButtonHandler}
+                  isChecked={answers[fieldIndex] !== null && answers[fieldIndex] === realIndex}
+                />
+              );
+            }}
+          />
+        </div>
       </div>
     );
   });
 
   return (
-    <div className="container">
-      <h2 className="visually-hidden">Вопросы.</h2>
+    <div className={clsx('container', classes.container)}>
+      <h2 className={classes.title}>Пожалуйста, ответьте на&nbsp;дополнительные вопросы.</h2>
+      <img className={classes.image} aria-hidden src={imageUrl} width={581} height={540} alt="" />
       <form onSubmit={submitFormHandler}>
         {fields}
-        <button type="submit" disabled={!canBeSubmitted}>
+        <Button className={classes.button} type="submit" disabled={!canBeSubmitted}>
           Отправить ответы
-        </button>
+        </Button>
       </form>
     </div>
   );
