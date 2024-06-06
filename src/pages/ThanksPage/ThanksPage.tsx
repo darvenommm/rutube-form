@@ -3,6 +3,9 @@ import { useEffect } from 'react';
 import { useLocalStorage } from '@/share/hooks/useLocalStorage';
 import { localStorageKeys } from '@/share/constants/localStorage';
 
+import classes from './ThanksPage.module.scss';
+import imageUrl from '@/assets/images/thanks.png';
+
 interface IBeautyOutput {
   questionID: number;
   responseID: number;
@@ -27,8 +30,14 @@ export const ThanksPage = (): JSX.Element => {
 
   return (
     <div className="container">
-      <h2>Спасибо за&nbsp;обратную связь!</h2>
-      <p>Это поможет нам улучшить сервис</p>
+      <div className={classes.innerContainer}>
+        <img className={classes.image} aria-hidden src={imageUrl} width={524} height={232} alt="" />
+        <h2 className={classes.title}>Спасибо за&nbsp;обратную связь!</h2>
+        <p className={classes.text}>Это поможет нам улучшить сервис</p>
+        <a className="button" href="#" target="_blank">
+          Перейти на платформу
+        </a>
+      </div>
     </div>
   );
 };

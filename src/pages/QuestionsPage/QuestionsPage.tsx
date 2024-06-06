@@ -4,7 +4,6 @@ import { clsx } from 'clsx';
 
 import { Row } from '@/share/components/Row';
 import { RadioButton, RadioButtonStyles } from '@/share/components/RadioButton';
-import { Button } from '@/share/components/Button';
 import { paths } from '@/share/constants/paths';
 import { fieldsNames, formFields } from './formFields';
 import { useLocalStorage } from '@/share/hooks/useLocalStorage';
@@ -96,9 +95,9 @@ export const QuestionsPage = (): JSX.Element => {
       <img className={classes.image} aria-hidden src={imageUrl} width={581} height={540} alt="" />
       <form onSubmit={submitFormHandler}>
         {fields}
-        <Button className={classes.button} type="submit" disabled={!canBeSubmitted}>
+        <button className={clsx('button', classes.button)} type="submit" disabled={!canBeSubmitted}>
           Отправить ответы
-        </Button>
+        </button>
       </form>
     </div>
   );

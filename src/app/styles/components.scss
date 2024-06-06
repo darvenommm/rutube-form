@@ -33,4 +33,30 @@
     clip: rect(0 0 0 0);
     overflow: hidden;
   }
+
+  .button {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 143%;
+    text-decoration: none;
+
+    background-color: vars.$vivid-cerulean;
+    border-radius: 22px;
+    transition: opacity 200ms, background-color 200ms;
+
+    border: none;
+    padding: 12px 49px;
+
+    @include mixins.hover {
+      opacity: 0.7;
+    }
+
+    @include mixins.active {
+      opacity: 0.4;
+    }
+
+    @include mixins.disabled {
+      background-color: #a2a2a2;
+    }
+  }
 }

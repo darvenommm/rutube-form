@@ -1,0 +1,46 @@
+@use '@/share/constants/styles/mixins';
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.image {
+  width: 524px;
+  height: 232px;
+  margin-bottom: 22px;
+
+  @include mixins.mobile {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 117%;
+
+  margin: 0;
+  margin-bottom: 28px;
+
+  @include mixins.mobile {
+    font-size: 22px;
+    line-height: 159%;
+
+    margin-bottom: 14px;
+  }
+}
+
+.text {
+  margin: 0;
+  margin-bottom: 28px;
+
+  @include mixins.mobile {
+    margin-bottom: 14px;
+  }
+}
