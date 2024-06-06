@@ -6,7 +6,6 @@ import { QuestionsPage } from '@/pages/QuestionsPage';
 import { ThanksPage } from '@/pages/ThanksPage';
 import { DonePage } from '@/pages/DonePage';
 import { paths } from '@/share/constants/paths';
-import { NotFoundPage } from '@/pages/NotFoundPage/NotFoundPage';
 
 import { localStorageKeys } from '@/share/constants/localStorage';
 
@@ -67,7 +66,10 @@ export const router = createBrowserRouter([
         element: <DonePage />,
         loader: finalPagesLoader,
       },
+      {
+        path: '*',
+        loader: (): Response => redirect(paths.main),
+      },
     ],
-    errorElement: <NotFoundPage />,
   },
 ]);
