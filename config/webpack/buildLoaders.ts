@@ -7,10 +7,7 @@ import type { ModuleOptions } from 'webpack';
 
 import type { IBuildOptions } from './types/types';
 
-export const buildLoaders = ({
-  isDevelopment,
-  paths,
-}: IBuildOptions): ModuleOptions['rules'] => {
+export const buildLoaders = ({ isDevelopment, paths }: IBuildOptions): ModuleOptions['rules'] => {
   const tsLoader = {
     test: /\.[jt]sx?$/i,
     exclude: /(node_modules)/,
@@ -34,6 +31,9 @@ export const buildLoaders = ({
             localIdentName: isDevelopment
               ? '[path][name]__[local]--[hash:base64:5]'
               : '[hash:base64:10]',
+          },
+          url: {
+            filter: (url: string): boolean => !/^\/fonts\//.test(url),
           },
         },
       },
@@ -78,12 +78,5 @@ export const buildLoaders = ({
     },
   ];
 
-  return [
-    tsLoader,
-    stylesLoader,
-    ...svgLoaders,
-    imageLoader,
-    textLoader,
-    fontsLoader,
-  ];
+  return [tsLoader, stylesLoader, ...svgLoaders, imageLoader, textLoader, fontsLoader];
 };

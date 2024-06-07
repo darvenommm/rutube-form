@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { ProgressPlugin, DefinePlugin } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
 import type { Configuration } from 'webpack';
 
@@ -27,6 +28,19 @@ export const buildPlugins = ({
     __IS_DEV__: JSON.stringify(isProduction),
   });
 
+  const copy = (...segments: string[]): { from: string; to: string } => ({
+    from: join(paths.public, ...segments),
+    to: join(paths.output, ...segments),
+  });
+  const copyPlugin = new CopyPlugin({
+    patterns: [
+      copy('favicon.ico'),
+      copy('site.webmanifest'),
+      copy('favicons'),
+      copy('fonts', 'Roboto'),
+    ],
+  });
+
   const commonPlugins = [htmlPlugin, definePlugin];
 
   if (isDevelopment) {
@@ -34,6 +48,6 @@ export const buildPlugins = ({
   }
 
   if (isProduction) {
-    return [...commonPlugins, stylePlugin];
+    return [...commonPlugins, stylePlugin, copyPlugin];
   }
 };
