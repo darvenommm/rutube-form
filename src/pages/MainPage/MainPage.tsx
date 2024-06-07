@@ -8,8 +8,10 @@ import { paths } from '@/share/constants/paths';
 import { useLocalStorage } from '@/share/hooks/useLocalStorage';
 import { localStorageKeys } from '@/share/constants/localStorage';
 
-import ImageUrl from '@/assets/images/main.png';
+import componentClasses from '@/share/components/styles/components.module.scss';
 import classes from './MainPage.module.scss';
+import ImageUrl from '@/assets/images/main/main.png';
+import ImageUrl2x from '@/assets/images/main/main@2x.png';
 
 import type { IRadioButtonData } from '@/share/components/RadioButton';
 import type { IRowCreateElementData } from '@/share/components/Row';
@@ -38,9 +40,17 @@ export const MainPage = (): JSX.Element => {
   );
 
   return (
-    <div className="container">
+    <div className={componentClasses.container}>
       <div className={classes.container}>
-        <img aria-hidden className={classes.image} width={455} height={200} src={ImageUrl} alt="" />
+        <img
+          aria-hidden
+          srcSet={`${ImageUrl}, ${ImageUrl2x} 2x`}
+          className={classes.image}
+          width={455}
+          height={224}
+          src={ImageUrl}
+          alt=""
+        />
         <div className={classes.textContainer}>
           <h2 className={classes.title}>Уважаемый клиент!</h2>
           <p className={classes.text}>

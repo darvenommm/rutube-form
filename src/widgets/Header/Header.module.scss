@@ -3,7 +3,7 @@
 .header {
   position: relative;
 
-  padding: 28px 0 48px;
+  padding: 28px 0 43px;
 
   &::before {
     position: absolute;
@@ -15,7 +15,7 @@
 
     height: 2px;
 
-    content: "";
+    content: '';
   }
 
   @include mixins.tablet {
@@ -23,6 +23,6 @@
     width: 100%;
 
     padding: 20px;
-    padding-bottom: 40px;
+    padding-bottom: 35px;
   }
 }

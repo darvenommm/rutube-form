@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
+import { clsx } from 'clsx';
 
 import { useLocalStorage } from '@/share/hooks/useLocalStorage';
 import { localStorageKeys } from '@/share/constants/localStorage';
 
+import componentClasses from '@/share/components/styles/components.module.scss';
 import classes from './ThanksPage.module.scss';
-import imageUrl from '@/assets/images/thanks.png';
+import imageUrl from '@/assets/images/thanks/thanks.png';
+import imageUrl2x from '@/assets/images/thanks/thanks@2x.png';
 
 interface IBeautyOutput {
   questionID: number;
@@ -29,12 +32,20 @@ export const ThanksPage = (): JSX.Element => {
   }, []);
 
   return (
-    <div className="container">
+    <div className={componentClasses.container}>
       <div className={classes.innerContainer}>
-        <img className={classes.image} aria-hidden src={imageUrl} width={524} height={232} alt="" />
+        <img
+          className={classes.image}
+          aria-hidden
+          srcSet={`${imageUrl}, ${imageUrl2x} 2x`}
+          width={524}
+          height={232}
+          src={imageUrl}
+          alt=""
+        />
         <h2 className={classes.title}>Спасибо за&nbsp;обратную связь!</h2>
         <p className={classes.text}>Это поможет нам улучшить сервис</p>
-        <a className="button" href="#" target="_blank">
+        <a className={clsx(componentClasses.button, classes.button)} href="#" target="_blank">
           Перейти на платформу
         </a>
       </div>

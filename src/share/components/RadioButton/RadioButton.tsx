@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import { clsx } from 'clsx';
 
+import componentsClasses from '@/share/components/styles/components.module.scss';
 import classes from './RadioButton.module.scss';
 
 export interface IRadioButtonData {
@@ -39,7 +40,7 @@ export const RadioButton = ({
   return (
     <div className="radioButton">
       <input
-        className={clsx('visually-hidden', 'radioButton__input')}
+        className={clsx(componentsClasses.visuallyHidden, 'radioButton__input')}
         id={inputId}
         type="radio"
         name={name}

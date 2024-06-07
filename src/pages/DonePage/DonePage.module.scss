@@ -17,8 +17,8 @@
   margin-bottom: 22px;
 
   @include mixins.mobile {
-    width: 100%;
-    height: auto;
+    width: 375px;
+    height: 163px;
   }
 }
 
@@ -41,6 +41,8 @@
 .text {
   margin: 0;
   margin-bottom: 28px;
+
+  max-width: 300px;
 
   @include mixins.mobile {
     margin-bottom: 14px;

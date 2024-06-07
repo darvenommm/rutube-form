@@ -11,11 +11,11 @@
   padding: 12px 0;
 
   width: 455px;
-  height: 200px;
+  height: 224px;
 
   @include mixins.mobile {
-    width: 100%;
-    height: auto;
+    width: 375px;
+    height: 188px;
   }
 }
 
@@ -62,14 +62,16 @@
 .buttons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 12px;
 
   margin-bottom: 8px;
 
   @include mixins.mobile {
-    $indent: 50px;
+    $indent: 45px;
+
+    justify-content: center;
 
     gap: 10px 6px;
 
@@ -92,6 +94,6 @@
   }
 
   @include mixins.mobile {
-    margin: 0 32px;
+    margin: 0 21px;
   }
 }

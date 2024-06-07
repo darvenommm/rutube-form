@@ -46,6 +46,6 @@
   .radioButton__input:focus-visible ~ .radioButton__label {
     background-color: vars.$extra-color;
     opacity: 1;
-    outline: 2px solid red;
+    outline: 1px solid red;
   }
 }

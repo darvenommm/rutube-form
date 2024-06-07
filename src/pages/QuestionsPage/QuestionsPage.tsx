@@ -9,8 +9,10 @@ import { fieldsNames, formFields } from './formFields';
 import { useLocalStorage } from '@/share/hooks/useLocalStorage';
 import { localStorageKeys } from '@/share/constants/localStorage';
 
+import componentClasses from '@/share/components/styles/components.module.scss';
 import classes from './QuestionsPage.module.scss';
-import imageUrl from '@/assets/images/form-image.png';
+import imageUrl from '@/assets/images/form/form.png';
+import imageUrl2x from '@/assets/images/form/form@2x.png';
 
 import type { FormEvent } from 'react';
 import type { IRadioButtonData } from '@/share/components/RadioButton';
@@ -90,12 +92,24 @@ export const QuestionsPage = (): JSX.Element => {
   });
 
   return (
-    <div className={clsx('container', classes.container)}>
+    <div className={clsx(componentClasses.container, classes.container)}>
       <h2 className={classes.title}>Пожалуйста, ответьте на&nbsp;дополнительные вопросы.</h2>
-      <img className={classes.image} aria-hidden src={imageUrl} width={581} height={540} alt="" />
+      <img
+        className={classes.image}
+        aria-hidden
+        srcSet={`${imageUrl}, ${imageUrl2x} 2x`}
+        width={581}
+        height={540}
+        src={imageUrl}
+        alt=""
+      />
       <form onSubmit={submitFormHandler}>
         {fields}
-        <button className={clsx('button', classes.button)} type="submit" disabled={!canBeSubmitted}>
+        <button
+          className={clsx(componentClasses.button, classes.button)}
+          type="submit"
+          disabled={!canBeSubmitted}
+        >
           Отправить ответы
         </button>
       </form>

@@ -17,8 +17,8 @@
   margin-bottom: 22px;
 
   @include mixins.mobile {
-    width: 100%;
-    height: auto;
+    width: 375px;
+    height: 163px;
   }
 }
 
@@ -45,4 +45,9 @@
   @include mixins.mobile {
     margin-bottom: 14px;
   }
+}
+
+.button {
+  padding-left: 34px;
+  padding-right: 34px;
 }
