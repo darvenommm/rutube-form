@@ -8,4 +8,6 @@ Before all, run **npm install**
 
 For starting the dev server: **npm run start**
 
+For compiling the project: **npm run build:prod**
+
 For starting watching the ready project: **npm run preview**
