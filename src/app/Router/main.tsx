@@ -11,23 +11,30 @@ import { localStorageKeys } from '@/share/constants/localStorage';
 
 type Response = ReturnType<typeof redirect>;
 
-const finalPagesLoader = (): null | Response => {
-  const feedback: number = Number(
-    JSON.parse(localStorage.getItem(localStorageKeys.feedback) ?? 'null') ?? '-1',
-  );
+// const finalPagesLoader = (): null | Response => {
+//   const feedback: number = Number(
+//     JSON.parse(localStorage.getItem(localStorageKeys.feedback) ?? 'null') ?? '-1',
+//   );
 
-  if (feedback === -1) {
-    return redirect(paths.main);
-  }
+//   if (feedback === -1) {
+//     return redirect(paths.main);
+//   }
 
-  const verbose: null | Array<null | number> = JSON.parse(
-    localStorage.getItem(localStorageKeys.verbose) ?? 'null',
-  );
-  const indexOfNull = verbose?.findIndex((item: null | number): boolean => item === null);
-  const needRedirect = verbose === null || indexOfNull !== -1;
+//   const verbose: null | Array<null | number> = JSON.parse(
+//     localStorage.getItem(localStorageKeys.verbose) ?? 'null',
+//   );
+//   const indexOfNull = verbose?.findIndex((item: null | number): boolean => item === null);
+//   if (verbose === null || indexOfNull !== -1) {
+//     return redirect(paths.questions);
+//   }
 
-  return needRedirect ? redirect(paths.questions) : null;
-};
+//   const isCompleted: boolean = JSON.parse(
+//     localStorage.getItem(localStorageKeys.isCompleted) ?? 'false',
+//   );
+
+//   return null;
+//   // return isCompleted ? redirect(paths.done) : null;
+// };
 
 export const router = createBrowserRouter([
   {
@@ -53,18 +60,46 @@ export const router = createBrowserRouter([
           );
           const indexOfNull = verbose?.findIndex((item: null | number): boolean => item === null);
           const needRedirect = verbose !== null && indexOfNull === -1;
-          return needRedirect ? redirect(paths.done) : null;
+          return needRedirect ? redirect(paths.thanks) : null;
         },
       },
       {
         path: paths.thanks,
         element: <ThanksPage />,
-        loader: finalPagesLoader,
+        loader: (): null | Response => {
+          const feedback: number = Number(
+            JSON.parse(localStorage.getItem(localStorageKeys.feedback) ?? 'null') ?? '-1',
+          );
+
+          if (feedback === -1) {
+            return redirect(paths.main);
+          }
+
+          const verbose: null | Array<null | number> = JSON.parse(
+            localStorage.getItem(localStorageKeys.verbose) ?? 'null',
+          );
+          const indexOfNull = verbose?.findIndex((item: null | number): boolean => item === null);
+          if (verbose === null || indexOfNull !== -1) {
+            return redirect(paths.questions);
+          }
+
+          const isCompleted: boolean = JSON.parse(
+            localStorage.getItem(localStorageKeys.isCompleted) ?? 'false',
+          );
+
+          return isCompleted ? redirect(paths.done) : null;
+        },
       },
       {
         path: paths.done,
         element: <DonePage />,
-        loader: finalPagesLoader,
+        loader: (): null | Response => {
+          const isCompleted: boolean = JSON.parse(
+            localStorage.getItem(localStorageKeys.isCompleted) ?? 'false',
+          );
+
+          return isCompleted ? null : redirect(paths.thanks);
+        },
       },
       {
         path: '*',

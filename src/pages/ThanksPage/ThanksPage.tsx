@@ -15,8 +15,9 @@ interface IBeautyOutput {
 }
 
 export const ThanksPage = (): JSX.Element => {
-  const [feedback, _] = useLocalStorage<null | number>(localStorageKeys.feedback, null);
-  const [verbose, __] = useLocalStorage<Array<number>>(localStorageKeys.verbose, []);
+  const feedback = useLocalStorage<null | number>(localStorageKeys.feedback, null)[0];
+  const verbose = useLocalStorage<Array<number>>(localStorageKeys.verbose, [])[0];
+  const [_, setIsCompleted] = useLocalStorage<boolean>(localStorageKeys.isCompleted, true);
 
   useEffect((): void => {
     console.log('The feedback', feedback);
@@ -27,7 +28,6 @@ export const ThanksPage = (): JSX.Element => {
         responseID: item + 1,
       }),
     );
-
     console.log('The verbose form answers', beautyVerbose);
   }, []);
 
